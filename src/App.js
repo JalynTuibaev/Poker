@@ -1,16 +1,30 @@
+import {Component} from "react";
 import './App.css';
 import './cards.css';
 import Card from "./Components/Card";
+import  CardDeck from "./CardDeck";
 
-function App() {
-  return (
-      <div className="playingCards">
-          <Card suit='spades' rank='2' symbol="♠" />
-          <Card suit='diams' rank='k' symbol="♦" />
-          <Card suit='diams' rank='5' symbol="♦" />
-          <Card suit='hearts' rank='2' symbol="♥" />
-      </div>
-  );
+const deck = new CardDeck();
+const takeCards = deck.getCards(5);
+
+class App extends Component {
+    state = {
+        cards: [takeCards]
+    };
+
+
+    render() {
+        const cards = this.state.cards[0].map(card => {
+            return (
+                <Card suit={card.suit} rank={card.rank} key={card.suit + card.rank}/>
+            );
+        });
+        return (
+            <div className="playingCards">
+                {cards}
+            </div>
+        );
+    }
 }
 
 export default App;
