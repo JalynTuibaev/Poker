@@ -4,24 +4,39 @@ import './cards.css';
 import Card from "./Components/Card";
 import  CardDeck from "./CardDeck";
 
-const deck = new CardDeck();
-const takeCards = deck.getCards(5);
-
 class App extends Component {
     state = {
-        cards: [takeCards]
+        cards: []
     };
 
+    showCards () {
+        const deck = new CardDeck();
+        const takeCards = deck.getCards(5);
+        this.state.cards.push(takeCards);
+        return takeCards;
+    };
+
+    changeCards = () => {
+        const newArr = this.showCards();
+        this.setState({cards: [newArr]});
+    };
 
     render() {
-        const cards = this.state.cards[0].map(card => {
+        this.showCards();
+        const cards = this.state.cards[0].map((card) => {
             return (
-                <Card suit={card.suit} rank={card.rank} key={card.suit + card.rank}/>
+                <Card suit={card.suit}
+                      rank={card.rank}
+                      key={card.suit + card.rank}
+                />
             );
         });
         return (
-            <div className="playingCards">
-                {cards}
+            <div className='wrapper'>
+                <div className="playingCards">
+                    {cards}
+                </div>
+                <button onClick={this.changeCards} className='btn'>Change Cards</button>
             </div>
         );
     }
