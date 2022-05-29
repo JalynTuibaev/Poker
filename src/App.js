@@ -3,6 +3,7 @@ import './App.css';
 import './cards.css';
 import Card from "./Components/Card";
 import  CardDeck from "./CardDeck";
+import PokerHand from "./PokerHand";
 
 class App extends Component {
     state = {
@@ -21,6 +22,11 @@ class App extends Component {
         this.setState({cards: [newArr]});
     };
 
+    pokerHand = () => {
+        const pok = new PokerHand(this.state.cards);
+        return pok.getOutcome();
+    };
+
     render() {
         this.showCards();
         const cards = this.state.cards[0].map((card) => {
@@ -33,6 +39,9 @@ class App extends Component {
         });
         return (
             <div className='wrapper'>
+                <div className="combo-body">
+                    <h1 className='combo'>{this.pokerHand()}</h1>
+                </div>
                 <div className="playingCards">
                     {cards}
                 </div>

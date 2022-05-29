@@ -29,3 +29,13 @@
   box-shadow: 0 2px #21487f;
   cursor: pointer;
 }
+
+.combo-body {
+  margin: 0 auto;
+  width: 200px;
+  height: 100px;
+}
+
+.combo {
+  text-align: center;
+}
